@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ZaporArrow.DbContexts;
+using ZaporArrow.Services;
 
 namespace ZaporArrow
 {
@@ -26,6 +27,8 @@ namespace ZaporArrow
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IZaporArrowRepository, ZaporArrowRepository>();
 
             services.AddDbContext<ZaporArrowContext>(options =>
             {
