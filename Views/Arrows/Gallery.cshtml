@@ -27,7 +27,7 @@
             @foreach(var imgSrc in item.Images)
             {
                 <td>
-                    <img src="@imgSrc.ImageSource" height="150" width="150" />
+                    <img src="@imgSrc.ImageSource" height="150" width="150" asp-append-version="true"/>
                 </td>
             }
             <td>
