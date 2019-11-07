@@ -27,7 +27,9 @@
             @foreach(var imgSrc in item.Images)
             {
                 <td>
-                    <img src="@imgSrc.ImageSource" height="150" width="150" />
+                    <a asp-controller="Arrows" asp-action="ArrowDetails" asp-route-id="@item.ArrowId">
+                        <img src="@imgSrc.ImageSource" height="150" width="150" />
+                    </a>
                 </td>
             }
             <td>
