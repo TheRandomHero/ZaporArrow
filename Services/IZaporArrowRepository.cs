@@ -11,6 +11,7 @@ namespace ZaporArrow.Services
         IEnumerable<Arrow> GetAllArrows();
         Arrow GetArrow(Guid id);
         void AddArrow(Arrow arrow);
+        void AddImage(Image image);
         void DeleteArrow(Arrow arrow);
     }
 }

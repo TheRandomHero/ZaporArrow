@@ -14,7 +14,7 @@ namespace ZaporArrow.Entities
 
         [ForeignKey("ArrowId")]
         public Guid ArrowId { get; set; }
-        [Required]
+
         public double Size { get; set; }
 
         [Required]

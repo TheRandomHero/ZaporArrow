@@ -16,9 +16,15 @@ namespace ZaporArrow.Services
             _zaporArrowContext = context ?? 
                 throw new ArgumentNullException(nameof(context));
         }
+        public void AddImage(Image image)
+        {
+            _zaporArrowContext.Images.Add(image);
+            _zaporArrowContext.SaveChanges();
+        }
         public void AddArrow(Arrow arrow)
         {
-            throw new NotImplementedException();
+            _zaporArrowContext.Arrows.Add(arrow);
+            _zaporArrowContext.SaveChanges();
         }
 
         public void DeleteArrow(Arrow arrow)
