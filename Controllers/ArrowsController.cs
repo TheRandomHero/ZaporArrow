@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ZaporArrow.Models;
 using ZaporArrow.Services;
+using AutoMapper;
 
 namespace ZaporArrow.Controllers
 {
