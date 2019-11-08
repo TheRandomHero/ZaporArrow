@@ -50,7 +50,10 @@ namespace ZaporArrow.Services
                 throw new ArgumentNullException(nameof(arrowId));
             }
 
-            return _zaporArrowContext.Arrows.FirstOrDefault(a => a.ArrowId == arrowId);
+            var arrowFromDb = _zaporArrowContext.Arrows.FirstOrDefault(a => a.ArrowId == arrowId);
+            arrowFromDb.Images = _zaporArrowContext.Images.Where(x => x.ArrowId == arrowId).ToList();
+
+            return arrowFromDb;
         }
     }
 }

@@ -30,12 +30,15 @@ namespace ZaporArrow.Controllers
             return View(getAllArrows);
         }
 
-        [HttpGet("{arrowId:guid}")]
-        public IActionResult ArrowDetails(Guid arrowId)
+        [HttpGet("{Id:guid}")]
+        public IActionResult ArrowDetails([FromRoute]Guid Id)
         {
-            var arrowFromRepo = _zaporArrowRepository.GetArrow(arrowId);
+            var arrowFromRepo = _zaporArrowRepository.GetArrow(Id);
 
-            return View(arrowFromRepo);
+            var mappedArrow = _mapper.Map<ArrowDto>(arrowFromRepo);
+
+
+            return View(_mapper.Map<ArrowDto>(arrowFromRepo));
         }
     }
 }
