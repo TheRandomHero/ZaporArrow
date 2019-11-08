@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 
 namespace ZaporArrow.Models
 {
-    public class ArrowModel
+    public class ArrowDto
     {
-        public int Length { get; set; }
-        public string ImgSource { get; set; }
+        public Guid ArrowId { get; set; }
+
+        public double Length { get; set; }
+
         public string Description { get; set; }
+
+        public string ProfilPicture { get; set; }
 
     }
 }

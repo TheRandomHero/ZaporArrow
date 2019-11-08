@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ZaporArrow.Models;
 using ZaporArrow.Services;
 
 namespace ZaporArrow.Controllers
@@ -10,11 +12,13 @@ namespace ZaporArrow.Controllers
     public class ArrowsController : Controller
     {
         private readonly IZaporArrowRepository _zaporArrowRepository;
+        private readonly IMapper _mapper;
 
-        public ArrowsController(IZaporArrowRepository arrowRepository)
+        public ArrowsController(IZaporArrowRepository arrowRepository, IMapper mapper)
         {
             _zaporArrowRepository = arrowRepository ??
                 throw new ArgumentException(nameof(arrowRepository));
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -24,6 +28,17 @@ namespace ZaporArrow.Controllers
             var getAllArrows = _zaporArrowRepository.GetAllArrows();
 
             return View(getAllArrows);
+        }
+
+        [HttpGet("{Id:guid}")]
+        public IActionResult ArrowDetails([FromRoute]Guid Id)
+        {
+            var arrowFromRepo = _zaporArrowRepository.GetArrow(Id);
+
+            var mappedArrow = _mapper.Map<ArrowDto>(arrowFromRepo);
+
+
+            return View(_mapper.Map<ArrowDto>(arrowFromRepo));
         }
     }
 }
