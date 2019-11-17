@@ -80,8 +80,10 @@ namespace ZaporArrow.Controllers
 
                 _zaporArrowRepository.AddArrow(newArrow);
                 _zaporArrowRepository.AddImage(newImage);
+
+                return Redirect($"/{newArrow.ArrowId}");
             }
-            return RedirectToAction("Gallery", "Arrows");
+            return View();
         }
 
 
