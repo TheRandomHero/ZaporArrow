@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ZaporArrow.DbContexts;
 using ZaporArrow.Services;
+using Newtonsoft.Json.Serialization;
 
 namespace ZaporArrow
 {
@@ -27,6 +28,14 @@ namespace ZaporArrow
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddMvc().
+                AddNewtonsoftJson(opt =>
+                    opt.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver())
+                .AddJsonOptions(opt =>
+                opt.JsonSerializerOptions.PropertyNameCaseInsensitive = true);
+
+
             services.AddControllersWithViews();
 
 
