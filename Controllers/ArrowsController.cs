@@ -22,7 +22,7 @@ namespace ZaporArrow.Controllers
         public IActionResult Gallery()
         {
 
-            var getAllArrows = _zaporArrowRepository.GetAllArrows();
+            var getAllArrows = _zaporArrowRepository.GetAllArrowsWithImages();
 
             return View(getAllArrows);
         }

@@ -13,7 +13,10 @@ namespace ZaporArrow.Profiles
             CreateMap<Entities.Arrow, Models.ArrowDto>()
                 .ForMember(
                 dest => dest.ProfilPicture,
-                opt => opt.MapFrom(src => src.Images.First().ImageSource));
+                opt => opt.MapFrom(src => src.Images.First().ImageSource))
+                .ForMember(
+                dest => dest.Images,
+                opt => opt.MapFrom(src => src.Images.ToList())).ReverseMap();
         }
     }
 }

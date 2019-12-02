@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ZaporArrow.Entities;
 
 namespace ZaporArrow.Models
 {
@@ -14,6 +15,8 @@ namespace ZaporArrow.Models
         public string Description { get; set; }
 
         public string ProfilPicture { get; set; }
+
+        public ICollection<Image> Images { get; set; }
 
     }
 }

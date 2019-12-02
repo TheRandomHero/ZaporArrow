@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,6 +22,15 @@ namespace ZaporArrow.Services
             _zaporArrowContext.Images.Add(image);
             _zaporArrowContext.SaveChanges();
         }
+
+        public void AddImageToArrow(Guid arrowId, Image image)
+        {
+            var theArrow = GetArrow(arrowId);
+            theArrow.Images.Add(image);
+            _zaporArrowContext.Images.Add(image);
+            _zaporArrowContext.SaveChanges();
+        }
+
         public void AddArrow(Arrow arrow)
         {
             _zaporArrowContext.Arrows.Add(arrow);
@@ -32,15 +42,10 @@ namespace ZaporArrow.Services
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Arrow> GetAllArrows()
+        public IEnumerable<Arrow> GetAllArrowsWithImages()
         {
-            var allArrows = _zaporArrowContext.Arrows.ToList<Arrow>();
-            foreach(var arrow in allArrows)
-            {
-                arrow.Images = _zaporArrowContext.Images.Where(x => x.ArrowId == arrow.ArrowId).ToList();
-            }
-
-            return allArrows;
+            return _zaporArrowContext.Arrows
+                .Include(t => t.Images).ToList();
         }
 
         public Arrow GetArrow(Guid arrowId)
@@ -50,10 +55,8 @@ namespace ZaporArrow.Services
                 throw new ArgumentNullException(nameof(arrowId));
             }
 
-            var arrowFromDb = _zaporArrowContext.Arrows.FirstOrDefault(a => a.ArrowId == arrowId);
-            arrowFromDb.Images = _zaporArrowContext.Images.Where(x => x.ArrowId == arrowId).ToList();
-
-            return arrowFromDb;
+            return _zaporArrowContext.Arrows.Include(t => t.Images)
+                .Where(t => t.ArrowId == arrowId).FirstOrDefault();
         }
     }
 }
